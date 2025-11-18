@@ -19,6 +19,7 @@ html, body {
   background: linear-gradient(180deg, #0f1222 0%, #12152a 100%);
   color: var(--text);
   font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  overflow-x: hidden;
 }
 
 .app-header {
@@ -46,11 +47,15 @@ html, body {
 
 label { display: block; margin-bottom: 6px; color: var(--muted); }
 select, button {
-  padding: 10px 12px;
+  padding: 0.625rem 0.75rem;
   border: 1px solid #2a2f4a;
   border-radius: 10px;
   background: #0e1122;
   color: var(--text);
+  font-size: 1rem;
+  min-height: 48px;
+  min-width: 48px;
+  touch-action: manipulation;
 }
 button.primary { background: var(--accent); color: #001018; border: none; }
 button:disabled { opacity: 0.6; cursor: not-allowed; }
@@ -105,7 +110,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
   border-radius: 12px;
 }
 .note {
-  font-size: clamp(48px, 10vw, 96px);
+  font-size: clamp(3rem, 12vw, 6rem);
   font-weight: 800;
   letter-spacing: 1px;
   text-align: center;
@@ -183,5 +188,11 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 /* Responsive */
 @media (max-width: 640px) {
   .controls { grid-template-columns: 1fr; }
-  .details { text-align: left; }
+  .note-readout { grid-template-columns: 1fr; }
+  .details { text-align: center; }
+  .note { font-size: clamp(3rem, 16vw, 7rem); }
+  select, button { font-size: 1.1rem; }
+}
+@media (orientation: portrait) {
+  .note { font-size: clamp(3.25rem, 18vw, 7.5rem); }
 }
