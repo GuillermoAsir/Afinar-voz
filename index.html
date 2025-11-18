@@ -1,0 +1,91 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Singing Tuner — Real-Time Vocal Pitch Detector</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- App Header -->
+  <header class="app-header">
+    <h1>Singing Tuner</h1>
+    <p class="subtitle">Real-time vocal pitch detection in your browser</p>
+  </header>
+
+  <!-- Controls -->
+  <section class="controls">
+    <div class="control-group">
+      <label for="micSelect">Microphone</label>
+      <select id="micSelect" aria-label="Microphone selector"></select>
+    </div>
+    <div class="control-group inline">
+      <button id="startBtn" class="primary">Start</button>
+      <button id="stopBtn">Stop</button>
+      <label class="toggle">
+        <input type="checkbox" id="refToneToggle" />
+        <span>A4 440 Hz reference tone</span>
+      </label>
+    </div>
+  </section>
+
+  <!-- Status / Warnings -->
+  <section class="status">
+    <div id="secureContextWarning" class="warning hidden">
+      Microphone access may be blocked when opened as a file. If access fails, open this page via HTTPS or localhost.
+    </div>
+    <div id="errorBox" class="error hidden"></div>
+    <div id="audioActive" class="mic-indicator" title="Audio active">
+      <span class="dot"></span>
+      <span>Mic</span>
+    </div>
+  </section>
+
+  <!-- Live Pitch Display -->
+  <main class="display">
+    <div class="note-readout">
+      <div id="noteName" class="note">—</div>
+      <div class="details">
+        <div id="freqHz" class="freq">0.0 Hz</div>
+        <div id="cents" class="cents">0 cents</div>
+      </div>
+    </div>
+
+    <!-- Cents deviation needle -->
+    <div class="tuner">
+      <div class="scale">
+        <span>-50</span>
+        <span>-25</span>
+        <span>0</span>
+        <span>+25</span>
+        <span>+50</span>
+      </div>
+      <div id="needle" class="needle"></div>
+    </div>
+
+    <!-- Piano keyboard (C3–C6) -->
+    <div class="piano" id="piano"></div>
+
+    <!-- Pitch history graph -->
+    <canvas id="history" width="800" height="160" aria-label="Pitch history"></canvas>
+  </main>
+
+  <!-- Help -->
+  <section class="instructions">
+    <h2>How to Use</h2>
+    <ul>
+      <li>Choose your microphone, then press Start to grant access.</li>
+      <li>Sing a sustained note. The tuner shows the nearest musical note and how sharp/flat you are.</li>
+      <li>Use the A4 reference tone to match tuning (toggle on/off).</li>
+      <li>If the mic is blocked when opening from disk, open via localhost or HTTPS.</li>
+    </ul>
+  </section>
+
+  <footer class="footer">
+    <small>No audio leaves your device. Runs entirely in your browser.</small>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
